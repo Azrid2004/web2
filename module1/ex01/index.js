@@ -1,1 +1,1 @@
-document.alert('hi!');
+// create function
