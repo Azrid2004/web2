@@ -9,7 +9,7 @@ app.use(express.urlencoded({ extended: false }));
 
 let counter: number = 0;
 app.use((_req, _res, next) => {
-    if(_req.method == 'GET') {
+    if(_req.method === 'GET') {
         counter++;
         console.log(`GET counter : ${counter}`);
     }
