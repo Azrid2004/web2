@@ -7,3 +7,14 @@ GET {{url}}/films/2
 
 ### GET filtre drinks with the query
 GET {{url}}/films?minimum-duration=150
+
+### POST créer une nouvel ressource film
+POST {{url}}/films
+Content-Type: application/json
+
+{
+    "title": "Jurassic park",
+    "director": "John Hammond",
+    "duration": 126,
+    "budget": 145
+}
