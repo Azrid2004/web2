@@ -1,0 +1,9 @@
+### GET Read all drinks
+@url = http://localhost:3000
+GET {{url}}/films/
+
+### GET Read a specific drink with id
+GET {{url}}/films/2
+
+### GET filtre drinks with the query
+GET {{url}}/films?minimum-duration=150
