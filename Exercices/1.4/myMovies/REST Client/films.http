@@ -22,4 +22,3 @@ Content-Type: application/json
 ### GET Filtrez tous les films qui commencent par une certaines chaînes de caractères
 GET {{url}}/films/caracteres/In
 
-

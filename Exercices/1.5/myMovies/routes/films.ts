@@ -30,6 +30,10 @@ const films: Film[] = [
 //route get id
 router.get('/:id', (req, res) => {
     const id = Number(req.params.id);
+
+    if(isNaN(id)) {
+        return res.sendStatus(400);
+    }
     
     const film = films.find( (film) => film.id === id);
     if(!film) {
@@ -45,7 +49,11 @@ router.get('/', (req, res) => {
     if(!minDur) {
         return res.json(films);
     }
+    //verifier si c'est un nombre et qu'il est positif
     const minDuration = Number(minDur);
+    if(isNaN(minDuration) || minDuration <= 0) {
+        return res.sendStatus(400);
+    }
     //filter parcour tout les films du tableau 'films' et si pour le film courant, la condition retourne true, alors on le rajoute dans Filtered
     const filteredFilms : Film[] = films.filter((film) => { return film.duration >= minDuration;});
     return res.json(filteredFilms);
