@@ -2,8 +2,6 @@ import express from 'express';
 import { Film, NewFilm } from '../types';
 import { readAll, readOne, createOne, deleteOne, updateOne, updateOrCreatedOne } from '../services/films';
 
-const jsonDbPath = path.join(__dirname, "/../data/films.json");
-
 const router = express.Router();
 
 //route get id
