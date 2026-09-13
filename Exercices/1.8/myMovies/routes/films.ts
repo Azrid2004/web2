@@ -1,7 +1,5 @@
 import express from 'express';
 import { Film, NewFilm } from '../types';
-import path from 'node:path';
-import { parse, serialize } from '../utils/json';
 import { readAll, readOne, createOne, deleteOne, updateOne, updateOrCreatedOne } from '../services/films';
 
 const jsonDbPath = path.join(__dirname, "/../data/films.json");
@@ -27,7 +25,7 @@ router.get('/:id', (req, res) => {
 router.get('/', (req, res) => {
     let minDur = req.query["minimum-duration"];
     const minDuration = (minDur !== undefined) ? Number(minDur) : undefined; 
-    if(minDuration && (isNaN(minDuration) || minDuration <= 0)) {
+    if(minDuration !== undefined && (isNaN(minDuration) || minDuration <= 0)) {
         return res.sendStatus(400);
     }
 
@@ -60,7 +58,7 @@ router.post('/', (req, res) => {
         return res.sendStatus(409);
     }
 
-    return res.json(newFilm);
+    return res.json(filmCreated);
 });
 
 router.get('/caracteres/:c', (req, res) => {
@@ -145,7 +143,7 @@ router.put('/:id', (req, res) => {
     const filmNew = body as NewFilm;
 
     const film = updateOrCreatedOne(id, filmNew);
-    if(filmNew) {
+    if(!filmNew) {
         return res.sendStatus(409)
     }
     return res.json(film);

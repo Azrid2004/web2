@@ -36,7 +36,7 @@ const nextId = (): number => {
 
 const readAll = (minDuration: number | undefined): Film[] => {
     const films = parse(jsonDbPath, defaultFilms);
-    if(!minDuration) {
+    if(minDuration === undefined) {
         return films;
     }
     const filmsFiltered: Film[] = films.filter( (film) => { return film.duration >= minDuration; });
@@ -53,8 +53,8 @@ const createOne = (newFilm: NewFilm): Film | undefined => {
     const films = parse(jsonDbPath, defaultFilms);
 
     const filmCreated = { id: nextId(), ...newFilm };
-    const Existingfilm = films.find( (film) => { film.title.toLowerCase ===  filmCreated.title.toLowerCase 
-                                                 && film.director.toLowerCase === filmCreated.director.toLowerCase } );
+    const Existingfilm = films.find( (film) => { return (film.title.toLowerCase() ===  filmCreated.title.toLowerCase() 
+                                                 && film.director.toLowerCase() === filmCreated.director.toLowerCase()); } );
     if(Existingfilm) {
         return undefined;
     }
@@ -94,7 +94,7 @@ const updateOrCreatedOne = (id: number, updatedFilm: NewFilm): Film | undefined 
     const films = parse(jsonDbPath, defaultFilms);
     const index = films.findIndex( (film) => { return film.id === id; });
     if(index === -1) {
-        return undefined;
+        return createOne(updatedFilm);
     }
 
     const film = { ...films[index], ...updatedFilm};
